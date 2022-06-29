@@ -1,0 +1,1 @@
+<view><view class="result-title">搜索 “{{a}}” 结果</view></view>

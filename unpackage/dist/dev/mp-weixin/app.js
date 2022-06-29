@@ -7,6 +7,8 @@ if (!Math) {
   "./pages/message/message.js";
   "./pages/mine/mine.js";
   "./pages/login/login.js";
+  "./pages/search/search.js";
+  "./pages/search-result/search-result.js";
 }
 const _sfc_main = {
   onLaunch: function() {
