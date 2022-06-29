@@ -12,7 +12,7 @@ export default function (options) {
     uni.request({
       timeout: 5000,
       ...options,
-      url: `http://localhost:5555${options.url}`,
+      url: `http://192.168.3.251:5555${options.url}`,
       success(res) {
         resolve(res)
       },

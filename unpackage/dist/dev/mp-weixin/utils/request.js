@@ -24,7 +24,7 @@ function request(options) {
     common_vendor.index.request(__spreadProps(__spreadValues({
       timeout: 5e3
     }, options), {
-      url: `http://localhost:5555${options.url}`,
+      url: `http://192.168.3.251:5555${options.url}`,
       success(res) {
         resolve(res);
       },
