@@ -1,52 +1,68 @@
 <template>
   <view class="punch-list">
-    <view class="punch-item">
-      <view class="punch-main">
-        <image class="punch-author" src="https://tva1.sinaimg.cn/large/e6c9d24egy1h36ok2cgx6j20py0q2jsy.jpg" mode="aspectFill"></image>
-        <view class="punch-content">
-          <view class="punch-user">
-            <view class="punch-nick">小猫</view>
-            <view class="punch-status">@ 今天不学习，明天就淘汰</view>
-          </view>
-          <view class="punch-summary">
-            今天的收获是：只看不做是学不会的，看 100 遍都学不会，只有做，不断做，不断思考，不断找老师提问交流得到反馈，才能学会！刘思毅，加油加油加油！！！
-          </view>
-          <view class="punch-pics">
-            <view class="punch-pic" style="background-image: url(https://tva1.sinaimg.cn/large/e6c9d24ely1h3qa6yhzw8j21410u0wgy.jpg)"></view>
-            <view class="punch-pic" style="background-image: url(https://tva1.sinaimg.cn/large/e6c9d24ely1h3qa6yhzw8j21410u0wgy.jpg)"></view>
-            <view class="punch-pic" style="background-image: url(https://tva1.sinaimg.cn/large/e6c9d24ely1h3qa6yhzw8j21410u0wgy.jpg)"></view>
-            <view class="punch-pic" style="background-image: url(https://tva1.sinaimg.cn/large/e6c9d24ely1h3qa6yhzw8j21410u0wgy.jpg)"></view>
-            <view class="punch-pic" style="background-image: url(https://tva1.sinaimg.cn/large/e6c9d24ely1h3qa6yhzw8j21410u0wgy.jpg)"></view>
-            <view class="punch-pic" style="background-image: url(https://tva1.sinaimg.cn/large/e6c9d24ely1h3qa6yhzw8j21410u0wgy.jpg)"></view>
-            <view class="punch-pic" style="background-image: url(https://tva1.sinaimg.cn/large/e6c9d24ely1h3qa6yhzw8j21410u0wgy.jpg)"></view>
-            <view class="punch-pic" style="background-image: url(https://tva1.sinaimg.cn/large/e6c9d24ely1h3qa6yhzw8j21410u0wgy.jpg)"></view>
-            <view class="punch-pic" style="background-image: url(https://tva1.sinaimg.cn/large/e6c9d24ely1h3qa6yhzw8j21410u0wgy.jpg)"></view>
-          </view>
-          <view class="punch-toolbar">
-            <view class="punch-time">50分钟前</view>
-            <view class="punch-more"></view>
+    <view class="punch-item" v-for="item in punches" :key="item.id">
+      <image class="punch-author" :src="item.user.avatar" mode="aspectFill"></image>
+      <view class="punch-content">
+        <view class="punch-user">
+          <view class="punch-nick">{{ item.user.nick }}</view>
+          <view class="punch-status" v-if="item.user.status">@ {{ item.user.status }}</view>
+        </view>
+        <view class="punch-summary">
+          {{ item.comtent }}
+        </view>
+        <view class="punch-pics">
+          <view v-for="(pic, picIdx) in item.pics" :key="picIdx" class="punch-pic" :style="`background-image: url(${pic})`"></view>
+        </view>
+        <view class="punch-toolbar">
+          <view class="punch-time">{{ item.createdAt }}</view>
+          <view class="punch-more"></view>
+        </view>
+        
+        <view class="punch-likes" v-if="item.likes.length">
+          <template v-for="(like, likeIdx) in item.likes" :key="like.id">
+            <view class="punch-like">{{ like.nick }}</view>
+            <view class="punch-like-sep" v-if="likeIdx != item.likes.length - 1">,</view>
+          </template>
+        </view>
+        <view class="punch-reviews">
+          <view class="punch-review" v-for="review in item.reviews" :key="review.id">
+            <view class="punch-review-user">{{ review.user.nick }}</view>：
+            <view class="punch-review-content">{{ review.content }}</view>
           </view>
         </view>
       </view>
-      <view class="punch-likes">
-        
-      </view>
-      <view class="punch-reviews">
-        
-      </view>
     </view>
+    
   </view>
 </template>
 
 <script>
+  import { getPunches } from '@/api/punch.js'
+  
   export default {
     data() {
       return {
-        
+        query: {
+          page: 1,
+          perPage: 2,
+        },
+        total: 0,
+        punches: [],
       }
     },
+    onLoad() {
+      this.getPunches()
+    },
+    onReachBottom() {
+      this.getPunches()
+    },
     methods: {
-      
+      async getPunches() {
+        const res = await getPunches(this.query)
+        this.punches.push(...res.data.data)
+        this.total = res.data.total
+        this.query.page++
+      },
     }
   }
 </script>
@@ -57,15 +73,12 @@
 }
 
 .punch-item {
+  display: flex;
   padding-bottom: 16rpx;
   border-bottom: 1rpx solid #f5f5f5;
   margin-bottom: 16rpx;
 }
   
-.punch-main {
-  display: flex;
-}
-
 .punch-author {
   width: 100rpx;
   height: 100rpx;
@@ -141,5 +154,47 @@
   background-position: center;
   background-size: auto 28rpx;
   position: relative;
+}
+
+.punch-likes {
+  background-color: #f7f7f7;
+  background-image: url(/static/heart.png);
+  background-repeat: no-repeat;
+  background-position: 14rpx 16rpx;
+  background-size: 30rpx;
+  padding-left: 16rpx;
+  padding-top: 8rpx;
+  text-indent: 36rpx;
+  line-height: 40rpx;
+  font-size: 26rpx;
+  margin-top: 16rpx;
+}
+
+.punch-like {
+  display: inline-block;
+  text-indent: 0;
+  color: #5b6b92;
+}
+
+.punch-like-sep {
+  display: inline-block;
+  text-indent: 0;
+  margin-right: 8rpx;
+}
+
+.punch-reviews {
+  background-color: #f7f7f7;
+  line-height: 40rpx;
+  font-size: 26rpx;
+  padding: 8rpx 16rpx;
+}
+
+.punch-review-user {
+  display: inline-block;
+  color: #5b6b92;
+}
+
+.punch-review-content {
+  display: inline-block;
 }
 </style>
