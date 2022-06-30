@@ -15,6 +15,13 @@
           "query": "keyword=小猫",
           "launchMode": "default",
           "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/punch-list/punch-list",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }

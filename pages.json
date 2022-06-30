@@ -5,42 +5,33 @@
       "enablePullDownRefresh": false
     }
   }, {
-    "path": "pages/message/message",
-    "style": {
-      "navigationBarTitleText": "消息",
-      "enablePullDownRefresh": false
-    }
-  }, {
-    "path": "pages/mine/mine",
-    "style": {
-      "navigationBarTitleText": "我的",
-      "enablePullDownRefresh": false
-    }
-  }, {
     "path": "pages/login/login",
     "style": {
       "navigationBarTitleText": "登录/注册",
       "enablePullDownRefresh": false
     }
-  }    ,{
-            "path" : "pages/search/search",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/search-result/search-result",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-    ],
+  }, {
+    "path": "pages/search/search",
+    "style": {
+      "navigationBarTitleText": "",
+      "enablePullDownRefresh": false
+    }
+
+  }, {
+    "path": "pages/search-result/search-result",
+    "style": {
+      "navigationBarTitleText": "",
+      "enablePullDownRefresh": false
+    }
+
+  }, {
+    "path": "pages/punch-list/punch-list",
+    "style": {
+      "navigationBarTitleText": "打卡",
+      "enablePullDownRefresh": false
+    }
+
+  }],
   "globalStyle": {
     "navigationBarTextStyle": "black",
     "navigationBarTitleText": "面壁计划",
@@ -56,17 +47,12 @@
       "pagePath": "pages/index/index",
       "iconPath": "static/home.png",
       "selectedIconPath": "static/home-selected.png",
-      "text": "发现"
+      "text": "学习"
     }, {
-      "pagePath": "pages/message/message",
-      "iconPath": "static/message.png",
-      "selectedIconPath": "static/message-selected.png",
-      "text": "消息"
-    }, {
-      "pagePath": "pages/mine/mine",
-      "iconPath": "static/mine.png",
-      "selectedIconPath": "static/mine-selected.png",
-      "text": "我的"
+      "pagePath": "pages/punch-list/punch-list",
+      "iconPath": "static/punch.png",
+      "selectedIconPath": "static/punch-selected.png",
+      "text": "打卡"
     }]
   }
 }
