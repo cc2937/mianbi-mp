@@ -2,6 +2,8 @@
 var api_punch = require("../../api/punch.js");
 var common_vendor = require("../../common/vendor.js");
 require("../../utils/request.js");
+common_vendor.dayjs.locale("zh-cn");
+common_vendor.dayjs.extend(common_vendor.relativeTime);
 const _sfc_main = {
   data() {
     return {
@@ -25,6 +27,9 @@ const _sfc_main = {
       this.punches.push(...res.data.data);
       this.total = res.data.total;
       this.query.page++;
+    },
+    formatTime(time) {
+      return common_vendor.dayjs(time).toNow();
     }
   }
 };
@@ -45,7 +50,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
             b: common_vendor.s(`background-image: url(${pic})`)
           };
         }),
-        g: common_vendor.t(item.createdAt),
+        g: common_vendor.t($options.formatTime(item.createdAt)),
         h: item.likes.length
       }, item.likes.length ? {
         i: common_vendor.f(item.likes, (like, likeIdx, i1) => {

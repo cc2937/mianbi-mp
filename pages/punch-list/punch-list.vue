@@ -14,7 +14,7 @@
           <view v-for="(pic, picIdx) in item.pics" :key="picIdx" class="punch-pic" :style="`background-image: url(${pic})`"></view>
         </view>
         <view class="punch-toolbar">
-          <view class="punch-time">{{ item.createdAt }}</view>
+          <view class="punch-time">{{ formatTime(item.createdAt) }}</view>
           <view class="punch-more"></view>
         </view>
         
@@ -38,6 +38,12 @@
 
 <script>
   import { getPunches } from '@/api/punch.js'
+  import dayjs  from 'dayjs'
+  import 'dayjs/locale/zh-cn'
+  import relativeTime from 'dayjs/plugin/relativeTime'
+  
+  dayjs.locale('zh-cn')
+  dayjs.extend(relativeTime)
   
   export default {
     data() {
@@ -62,6 +68,9 @@
         this.punches.push(...res.data.data)
         this.total = res.data.total
         this.query.page++
+      },
+      formatTime(time) {
+        return dayjs(time).toNow()
       },
     }
   }
