@@ -66,7 +66,6 @@
       }
     },
     onShow() {
-      console.log(111)
       this.getPunches()
     },
     onReachBottom() {

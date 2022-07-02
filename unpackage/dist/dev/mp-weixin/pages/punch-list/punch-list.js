@@ -17,7 +17,6 @@ const _sfc_main = {
     };
   },
   onShow() {
-    console.log(111);
     this.getPunches();
   },
   onReachBottom() {
