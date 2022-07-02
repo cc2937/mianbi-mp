@@ -7,3 +7,11 @@ export function getPunches(data = {}) {
     data,
   })
 }
+
+export function createPunch(data) {
+  return request({
+    method: 'POST',
+    url: '/punches',
+    data,
+  })
+}

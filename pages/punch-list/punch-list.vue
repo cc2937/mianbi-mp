@@ -65,7 +65,8 @@
         punches: [],
       }
     },
-    onLoad() {
+    onShow() {
+      console.log(111)
       this.getPunches()
     },
     onReachBottom() {
@@ -79,7 +80,9 @@
             Promise.all(promises).then((results) => {
               const urls = results
                 .map(res => JSON.parse(res.data).url)
-              console.log(urls)
+              uni.navigateTo({
+                url: `/pages/punch-create/punch-create?urls=${JSON.stringify(urls)}`,
+              })
             })
           },
         })

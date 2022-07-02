@@ -16,7 +16,8 @@ const _sfc_main = {
       punches: []
     };
   },
-  onLoad() {
+  onShow() {
+    console.log(111);
     this.getPunches();
   },
   onReachBottom() {
@@ -29,7 +30,9 @@ const _sfc_main = {
           const promises = tempFilePaths.map((path) => api_file.upload(path));
           Promise.all(promises).then((results) => {
             const urls = results.map((res) => JSON.parse(res.data).url);
-            console.log(urls);
+            common_vendor.index.navigateTo({
+              url: `/pages/punch-create/punch-create?urls=${JSON.stringify(urls)}`
+            });
           });
         }
       });

@@ -9,6 +9,13 @@
           "query": "",
           "launchMode": "default",
           "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/punch-create/punch-create",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }

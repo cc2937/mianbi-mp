@@ -8,6 +8,7 @@ if (!Math) {
   "./pages/search/search.js";
   "./pages/search-result/search-result.js";
   "./pages/punch-list/punch-list.js";
+  "./pages/punch-create/punch-create.js";
 }
 const _sfc_main = {
   onLaunch: function() {

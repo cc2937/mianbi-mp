@@ -4,7 +4,8 @@
     "pages/login/login",
     "pages/search/search",
     "pages/search-result/search-result",
-    "pages/punch-list/punch-list"
+    "pages/punch-list/punch-list",
+    "pages/punch-create/punch-create"
   ],
   "window": {
     "navigationBarTextStyle": "black",
@@ -32,6 +33,5 @@
       }
     ]
   },
-  "usingComponents": {},
-  "sitemapLocation": "sitemap.json"
+  "usingComponents": {}
 }
