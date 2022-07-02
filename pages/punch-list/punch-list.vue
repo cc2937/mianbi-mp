@@ -32,8 +32,15 @@
         </view>
       </view>
     </view>
-    
   </view>
+  
+  <image
+    class="punch-add"
+    src="../../static/punch-add.png"
+    mode="aspectFit"
+    @click="punch"
+  >
+  </image>
 </template>
 
 <script>
@@ -41,6 +48,8 @@
   import dayjs  from 'dayjs'
   import 'dayjs/locale/zh-cn'
   import relativeTime from 'dayjs/plugin/relativeTime'
+  
+  import { upload } from '@/api/file.js'
   
   dayjs.locale('zh-cn')
   dayjs.extend(relativeTime)
@@ -63,6 +72,18 @@
       this.getPunches()
     },
     methods: {
+      punch() {
+        uni.chooseImage({
+          success({ tempFilePaths }) {
+            const promises = tempFilePaths.map(path => upload(path))
+            Promise.all(promises).then((results) => {
+              const urls = results
+                .map(res => JSON.parse(res.data).url)
+              console.log(urls)
+            })
+          },
+        })
+      },
       async getPunches() {
         const res = await getPunches(this.query)
         this.punches.push(...res.data.data)
@@ -205,5 +226,13 @@
 
 .punch-review-content {
   display: inline-block;
+}
+
+.punch-add {
+  width: 64rpx;
+  height: 64rpx;
+  position: fixed;
+  right: 24rpx;
+  bottom: 24rpx;
 }
 </style>
